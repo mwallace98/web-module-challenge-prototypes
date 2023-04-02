@@ -28,12 +28,13 @@ Person.prototype.eat = function(edible){
 }
 
 Person.prototype.poop = function(){
-  this.stomach ={}
+  this.stomach = [];
 }
 
 Person.prototype.toString = function(){
   return `${this.name}, ${this.age}`;
 }
+
 
 
 /*
@@ -52,9 +53,18 @@ Person.prototype.toString = function(){
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, mpg) {
+this.model = model;
+this.milesPerGallon = mpg;
+this.tank = 0;
+this.odometer = 0;
 }
+
+Car.prototype.fill = function(gallons){
+  this.tank = this.tank + gallons;
+}
+
+
 
 
 /*
@@ -65,8 +75,14 @@ function Car() {
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby() {
+function Baby(name,age,favoriteToy) {
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;
+}
 
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoriteToy}`;
 }
 
 
